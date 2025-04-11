@@ -1,4 +1,7 @@
 package com.example.lab2_jueves.repositorio;
 
-public interface EstadioRepository {
+import com.example.lab2_jueves.entidad.Estadio;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EstadioRepository extends JpaRepository<Estadio, Integer> {
 }
