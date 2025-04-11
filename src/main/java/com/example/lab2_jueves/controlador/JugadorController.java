@@ -7,6 +7,8 @@ import com.example.lab2_jueves.repositorio.SeleccionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -32,5 +34,24 @@ public class JugadorController {
         return "jugador/list";
     }
 
+
+    @GetMapping(value = "/crearJugador")
+    public String crearJugador(Model model) {
+        model.addAttribute("listaSelecciones", seleccionRepository.findAll());
+        return "jugador/newForm";
+    }
+
+    @PostMapping(value = "/verificarJugador")
+    public String verificarJugador(Jugador jugador) {
+
+        jugadorRepository.save(jugador);
+        return "redirect:/listaJugador";
+    }
+
+    @GetMapping(value = "/borrarJugador/{id}")
+    public String borrarJugador(@PathVariable("id") Integer id) {
+        jugadorRepository.deleteById(id);
+        return "redirect:/listaJugador";
+    }
 
 }
